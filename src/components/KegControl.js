@@ -33,7 +33,7 @@ class KegControl extends Component {
     }
     return (
      <React.Fragment>
-       
+       {currentlyVisibleState}
      </React.Fragment>
     )
   }
