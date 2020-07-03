@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import NewKegForm from './NewKegForm';
 import KegList from './KegList';
+import KegDetail from './KegDetail';
 
 class KegControl extends Component {
   constructor(props) {
@@ -30,11 +31,15 @@ class KegControl extends Component {
     let currentlyVisibleState = null;
     let buttonText = null;
 
-    if(this.state.formVisibleOnPage) {
+    if(this.state.selectedKeg != null) {
+      currentlyVisibleState = <KegDetail keg={this.state.selectedKeg}/>
+      buttonText = "Return to Keg List";
+    }
+    else if(this.state.formVisibleOnPage) {
       currentlyVisibleState = <NewKegForm onNewKegCreation={this.handleAddingNewKegToList}/>;
       buttonText = "Return to Keg List";
     } else {
-      currentlyVisibleState = <KegList kegList={this.state.masterKegList}/>
+      currentlyVisibleState = <KegList kegList={this.state.masterKegList} onKegSelection={this.handleChangingSelectedKeg}/>
       buttonText = "Add New Keg";
     }
     return (
