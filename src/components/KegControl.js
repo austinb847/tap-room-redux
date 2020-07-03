@@ -47,12 +47,6 @@ class KegControl extends Component {
         masterKegList: newKegList,
       });
     }
-
-    // if(this.state.pints >= 0) {
-    //   this.setState(prevState => ({
-    //     pints: prevState.pints - 1
-    //   }))
-    // }
   }
   
 

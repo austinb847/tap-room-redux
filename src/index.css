@@ -15,3 +15,9 @@ code {
 .header {
   text-align: center;
 }
+
+.keg:hover{
+  font-size: 29px;
+  cursor: pointer;
+  color: red;
+}
