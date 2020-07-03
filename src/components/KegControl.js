@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import NewKegForm from './NewKegForm';
 
 class KegControl extends Component {
   constructor(props) {
@@ -12,9 +13,9 @@ class KegControl extends Component {
 
   render() {
     return (
-      <div>
-        
-      </div>
+     <React.Fragment>
+       <NewKegForm />
+     </React.Fragment>
     )
   }
 }
