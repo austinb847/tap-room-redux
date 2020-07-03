@@ -25,6 +25,19 @@ class KegControl extends Component {
     const selectedKeg = this.state.masterKegList.filter(keg => keg.id === id)[0];
     this.setState({selectedKeg: selectedKeg});
   }
+
+  handleClick = () => {
+    if(this.state.selectedKeg != null) {
+      this.setState({
+        formVisibleOnPage: false,
+        selectedKeg: null
+      })
+    } else {
+      this.setState(prevState => ({
+        formVisibleOnPage: !prevState.formVisibleOnPage
+      }))
+    }
+  }
   
 
   render() {
@@ -45,6 +58,7 @@ class KegControl extends Component {
     return (
      <React.Fragment>
        {currentlyVisibleState}
+       <button onClick={this.handleClick} className="btn btn-success">{buttonText}</button>
      </React.Fragment>
     )
   }
