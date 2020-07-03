@@ -10,7 +10,6 @@ class KegControl extends Component {
     this.state = {
        formVisibleOnPage: false,
        masterKegList: [],
-       pints: 124,
        selectedKeg: null
     }
   }
@@ -38,6 +37,23 @@ class KegControl extends Component {
       }))
     }
   }
+
+  handleSellingKeg = (id) => {
+    const kegIndex = this.state.masterKegList.findIndex(element => element.id === id )
+    let newKegList = [...this.state.masterKegList]
+    if(newKegList[kegIndex].pints > 0) {
+      newKegList[kegIndex] = {...newKegList[kegIndex], pints: newKegList[kegIndex].pints - 1}
+      this.setState({
+        masterKegList: newKegList,
+      });
+    }
+
+    // if(this.state.pints >= 0) {
+    //   this.setState(prevState => ({
+    //     pints: prevState.pints - 1
+    //   }))
+    // }
+  }
   
 
   render() {
@@ -52,7 +68,7 @@ class KegControl extends Component {
       currentlyVisibleState = <NewKegForm onNewKegCreation={this.handleAddingNewKegToList}/>;
       buttonText = "Return to Keg List";
     } else {
-      currentlyVisibleState = <KegList kegList={this.state.masterKegList} onKegSelection={this.handleChangingSelectedKeg}/>
+      currentlyVisibleState = <KegList kegList={this.state.masterKegList} onKegSelection={this.handleChangingSelectedKeg} onSellingKeg={this.handleSellingKeg} />
       buttonText = "Add New Keg";
     }
     return (
