@@ -12,6 +12,12 @@ class KegControl extends Component {
        pints: 124
     }
   }
+
+  handleAddingNewKegToList = (newKeg) => {
+    const newMasterKegList = this.state.masterKegList.concat(newKeg);
+    this.setState({masterKegList: newMasterKegList,
+                    formVisibleOnPage: false});
+  }
   
 
   render() {
