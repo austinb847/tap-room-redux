@@ -11,6 +11,25 @@ describe('kegListReducer', () => {
     pints: 124
   }
 
+  const currentState = {
+    1: {
+      name: 'Corona extra',
+      brand: 'Modelo',
+      price: '3',
+      alcoholContent: '4.3',
+      id: 1,
+      pints: 124
+    },
+    2:  {
+      name: 'Natty Light',
+      brand: 'Garbage',
+      price: '2',
+      alcoholContent: '1.1',
+      id: 2,
+      pints: 124
+    }
+  }
+
   test('Should return default state if no action type is specified', () => {
     expect(kegListReducer({}, {type: null})).toEqual({});
   });
@@ -37,6 +56,38 @@ describe('kegListReducer', () => {
         pints: pints
       }
     })
+  });
+
+  test('Should successfully update keg data to masterKegList', () => {
+    const { name, brand, price, alcoholContent, id, pints } = keg;
+    action = {
+      type: 'ADD_KEG',
+      name: name,
+      brand: brand,
+      price: price,
+      alcoholContent: alcoholContent,
+      id: id,
+      pints: pints
+    };
+
+    expect(kegListReducer(currentState, action)).toEqual({
+      [id]: {
+        name: name,
+        brand: brand,
+        price: price,
+        alcoholContent: alcoholContent,
+        id: id,
+        pints: pints
+      }, 
+      2:  {
+        name: 'Natty Light',
+        brand: 'Garbage',
+        price: '2',
+        alcoholContent: '1.1',
+        id: 2,
+        pints: 124
+      }
+    });
   });
 
 
