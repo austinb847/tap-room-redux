@@ -41,14 +41,12 @@ class KegControl extends Component {
     }
   }
 
-  handleSellingKeg = (id) => {
-    const kegIndex = this.state.masterKegList.findIndex(element => element.id === id )
-    let newKegList = [...this.state.masterKegList]
-    if(newKegList[kegIndex].pints > 0) {
-      newKegList[kegIndex] = {...newKegList[kegIndex], pints: newKegList[kegIndex].pints - 1}
-      this.setState({
-        masterKegList: newKegList,
-      });
+  handleSellingKeg = (keg) => {
+    const { dispatch } = this.props;
+    if(this.props.masterKegList[keg.id].pints > 0) {
+      const soldKeg = {...keg, pints: keg.pints - 1};
+      const action = a.addKeg(soldKeg);
+      dispatch(action);
     }
   }
   
