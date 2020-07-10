@@ -90,5 +90,23 @@ describe('kegListReducer', () => {
     });
   });
 
+  test('should delete a keg from the list', () => {
+    action = {
+      type: 'DELETE_KEG',
+      id: 1
+    }
+
+    expect(kegListReducer(currentState, action)).toEqual({
+      2:  {
+        name: 'Natty Light',
+        brand: 'Garbage',
+        price: '2',
+        alcoholContent: '1.1',
+        id: 2,
+        pints: 124
+      }
+    });
+  });
+
 
 });
