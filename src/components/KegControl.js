@@ -4,31 +4,23 @@ import KegList from './KegList';
 import KegDetail from './KegDetail';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
+import * as a from './../actions';
 
 class KegControl extends Component {
   constructor(props) {
     super(props)
   
     this.state = {
-       formVisibleOnPage: false, //remove these later
-       selectedKeg: null
+       selectedKeg: null //remove later
     }
   }
 
   handleAddingNewKegToList = (newKeg) => {
     const { dispatch } = this.props;
-    const { name, brand, price, alcoholContent, id, pints } = newKeg;
-    const action = {
-      type: 'ADD_KEG',
-      id: id,
-      name: name,
-      brand: brand,
-      price: price,
-      alcoholContent: alcoholContent,
-      pints: pints
-    }
+    const action = a.addKeg(newKeg)
     dispatch(action);
-    this.setState({formVisibleOnPage: false}); //remove this later
+    const action2 = a.toggleForm();
+    dispatch(action2);
   }
 
   handleChangingSelectedKeg = (id) => {
@@ -37,15 +29,15 @@ class KegControl extends Component {
   }
 
   handleClick = () => {
-    if(this.state.selectedKeg != null) {
+    if(this.state.selectedKeg != null) { // change this to use redux store
       this.setState({
         formVisibleOnPage: false,
         selectedKeg: null
       })
     } else {
-      this.setState(prevState => ({
-        formVisibleOnPage: !prevState.formVisibleOnPage
-      }))
+      const { dispatch } = this.props;
+      const action = a.toggleForm();
+      dispatch(action);
     }
   }
 
@@ -69,7 +61,7 @@ class KegControl extends Component {
       currentlyVisibleState = <KegDetail keg={this.state.selectedKeg}/>
       buttonText = "Return to Keg List";
     }
-    else if(this.state.formVisibleOnPage) {
+    else if(this.props.formVisibleOnPage) {
       currentlyVisibleState = <NewKegForm onNewKegCreation={this.handleAddingNewKegToList}/>;
       buttonText = "Return to Keg List";
     } else {
@@ -86,12 +78,14 @@ class KegControl extends Component {
 }
 
 KegControl.propTypes = {
-  masterKegList: PropTypes.object
+  masterKegList: PropTypes.object,
+  formVisibleOnPage: PropTypes.bool
 }
 
 const mapStateToProps = state => {
   return {
-    masterKegList: state.masterKegList
+    masterKegList: state.masterKegList,
+    formVisibleOnPage: state.formVisibleOnPage
   }
 }
 
