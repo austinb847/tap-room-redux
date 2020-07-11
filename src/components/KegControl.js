@@ -47,6 +47,9 @@ class KegControl extends Component {
       const soldKeg = {...keg, pints: keg.pints - 1};
       const action = a.addKeg(soldKeg);
       dispatch(action);
+    } else {
+      const action2 = a.deleteKeg(keg.id);
+      dispatch(action2);
     }
   }
   
