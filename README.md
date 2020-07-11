@@ -4,7 +4,7 @@
 
 ## Description
 
-_A React App where a bar can track their kegs_
+_A React/redux App where a bar can track their kegs_
 
 
 ## Setup/Installation Requirements to run locally:
@@ -24,6 +24,7 @@ _A React App where a bar can track their kegs_
 ## Technologies Used
 
 * React
+* Redux
 * HTML
 * CSS
 * Bootstrap
