@@ -10,6 +10,7 @@ function KegList(props) {
       return <Keg
         whenKegClicked = {props.onKegSelection}
         whenKegSold = {props.onSellingKeg}
+        whenKegDeleted = {props.onDeletingKeg}
         name ={keg.name}
         brand={keg.brand}
         price={keg.price}
@@ -25,7 +26,8 @@ function KegList(props) {
 KegList.propTypes = {
   kegList: PropTypes.object,
   onKegSelection: PropTypes.func,
-  onSellingKeg: PropTypes.func
+  onSellingKeg: PropTypes.func,
+  onDeletingKeg: PropTypes.func
 }
 
 export default KegList

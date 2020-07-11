@@ -50,6 +50,11 @@ class KegControl extends Component {
     }
   }
   
+  handleDeletingKeg = (id) => {
+    const { dispatch } = this.props;
+    const action1 = a.deleteKeg(id);
+    dispatch(action1);
+  }
 
   render() {
     let currentlyVisibleState = null;
@@ -63,7 +68,7 @@ class KegControl extends Component {
       currentlyVisibleState = <NewKegForm onNewKegCreation={this.handleAddingNewKegToList}/>;
       buttonText = "Return to Keg List";
     } else {
-      currentlyVisibleState = <KegList kegList={this.props.masterKegList} onKegSelection={this.handleChangingSelectedKeg} onSellingKeg={this.handleSellingKeg} />
+      currentlyVisibleState = <KegList kegList={this.props.masterKegList} onKegSelection={this.handleChangingSelectedKeg} onSellingKeg={this.handleSellingKeg} onDeletingKeg ={this.handleDeletingKeg} />
       buttonText = "Add New Keg";
     }
     return (

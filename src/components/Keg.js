@@ -9,6 +9,8 @@ function Keg(props) {
         <p>Total Pints: {props.pints}</p>
         <button onClick= {() => props.whenKegSold({name: props.name, brand: props.brand, price: props.price, alcoholContent: props.alcoholContent, 
                                                     id: props.id, pints: props.pints})}>Sell Pint</button>
+        <br/>
+        <button onClick={() => props.whenKegDeleted(props.id)}>Delete Keg</button>
         <hr/>
       </div>
     </React.Fragment>
@@ -23,6 +25,7 @@ Keg.propTypes = {
   id: PropTypes.string,
   whenKegClicked: PropTypes.func,
   whenKegSold: PropTypes.func,
+  whenKegDeleted: PropTypes.func,
   pints: PropTypes.number
 }
 

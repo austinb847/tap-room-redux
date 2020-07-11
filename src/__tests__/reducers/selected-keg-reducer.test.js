@@ -31,14 +31,14 @@ describe('selectedKegReducer', () => {
       id: id,
       pints: pints
     }
-    expect(selectedKegReducer(null, action)).toEqual({
-      [id]: {
+    expect(selectedKegReducer({keg: null}, action)).toEqual({
+      keg: {
         name: name,
         brand: brand,
         price: price,
         alcoholContent: alcoholContent,
         id: id,
-        pints: pints
+        pints: 124
       }
     });
   });
