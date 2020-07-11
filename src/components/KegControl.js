@@ -6,13 +6,13 @@ import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import * as a from './../actions';
 
+
 class KegControl extends Component {
   constructor(props) {
     super(props)
   
-    this.state = {
-       selectedKeg: null //remove later
-    }
+    this.state = {}
+    
   }
 
   handleAddingNewKegToList = (newKeg) => {
@@ -24,20 +24,20 @@ class KegControl extends Component {
   }
 
   handleChangingSelectedKeg = (id) => {
-    const selectedKeg = this.props.masterKegList[id];
-    this.setState({selectedKeg: selectedKeg}); //remove this later
+    const { dispatch } = this.props;
+    const keg = this.props.masterKegList[id];
+    const action = a.selectKeg(keg);
+    dispatch(action);
   }
 
   handleClick = () => {
-    if(this.state.selectedKeg != null) { // change this to use redux store
-      this.setState({
-        formVisibleOnPage: false,
-        selectedKeg: null
-      })
+    const { dispatch } = this.props;
+    if(this.props.selectedKeg.keg != null) { 
+      const action2 = a.resetKeg();
+      dispatch(action2);
     } else {
-      const { dispatch } = this.props;
-      const action = a.toggleForm();
-      dispatch(action);
+      const action3 = a.toggleForm();
+      dispatch(action3);
     }
   }
 
@@ -55,8 +55,8 @@ class KegControl extends Component {
     let currentlyVisibleState = null;
     let buttonText = null;
 
-    if(this.state.selectedKeg != null) {
-      currentlyVisibleState = <KegDetail keg={this.state.selectedKeg}/>
+    if(this.props.selectedKeg.keg != null) {
+      currentlyVisibleState = <KegDetail keg={this.props.selectedKeg}/>
       buttonText = "Return to Keg List";
     }
     else if(this.props.formVisibleOnPage) {
@@ -77,13 +77,15 @@ class KegControl extends Component {
 
 KegControl.propTypes = {
   masterKegList: PropTypes.object,
-  formVisibleOnPage: PropTypes.bool
+  formVisibleOnPage: PropTypes.bool,
+  selectedKeg: PropTypes.object
 }
 
 const mapStateToProps = state => {
   return {
     masterKegList: state.masterKegList,
-    formVisibleOnPage: state.formVisibleOnPage
+    formVisibleOnPage: state.formVisibleOnPage,
+    selectedKeg: state.selectedKeg
   }
 }
 

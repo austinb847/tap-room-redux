@@ -32,3 +32,7 @@ export const selectKeg = (keg) => {
     pints: pints
   }
 }
+
+export const resetKeg = () => ({
+  type: 'RESET_KEG'
+})
