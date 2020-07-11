@@ -11,7 +11,8 @@ _A React App where a bar can track their kegs_
 
 * _Step 1: Clone this repository https://github.com/austinb847/tap-room_
 * _Step 2: Cd to new directory_
-* _Step 3: Run npm run start_
+* _Step 3: Run npm install to install dependencies_
+* _Step 3: Run npm run start to start local server_
 * _Step 5: Navigate to localhost:3000_
 
 
