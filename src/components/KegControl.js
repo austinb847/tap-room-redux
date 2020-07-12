@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import NewKegForm from './NewKegForm';
+import Modal from './Modal';
+import TriggerButton from './TriggerButton';
 import KegList from './KegList';
 import KegDetail from './KegDetail';
+import Container from './Container';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import * as a from './../actions';
@@ -11,7 +14,9 @@ class KegControl extends Component {
   constructor(props) {
     super(props)
   
-    this.state = {}
+    this.state = {
+      isShown: false
+    }
     
   }
 
@@ -19,8 +24,9 @@ class KegControl extends Component {
     const { dispatch } = this.props;
     const action = a.addKeg(newKeg)
     dispatch(action);
-    const action2 = a.toggleForm();
-    dispatch(action2);
+    // const action2 = a.toggleForm();
+    // dispatch(action2);
+    this.setState({isShown: false});
   }
 
   handleChangingSelectedKeg = (id) => {
@@ -38,7 +44,37 @@ class KegControl extends Component {
     } else {
       const action3 = a.toggleForm();
       dispatch(action3);
+      this.closeButton.focus();
+      this.toggleScrollLock();
     }
+  }
+
+  showModal = () => {
+    this.setState({isShown: true}, () => {
+      this.closeButton.focus();
+      this.toggleScrollLock();
+    });
+  }
+
+  closeModal = () => {
+    this.setState({isShown: false});
+    this.TriggerButton.focus();
+    this.toggleScrollLock();
+  };
+
+  onKeyDown = (event) => {
+    if(event.keyCode === 27) {
+      this.closeModal();
+    }
+  };
+
+  onClickOutside = (event) => {
+    if(this.modal && this.modal.contains(event.target)) return
+    this.closeModal();
+  }
+
+  toggleScrollLock = () => {
+    document.querySelector('html').classList.toggle('scroll-lock');
   }
 
   handleSellingKeg = (keg) => {
@@ -62,22 +98,44 @@ class KegControl extends Component {
   render() {
     let currentlyVisibleState = null;
     let buttonText = null;
+    let triggerText = 'Add new Keg';
+    let showButton = null;
 
     if(this.props.selectedKeg.keg != null) {
       currentlyVisibleState = <KegDetail keg={this.props.selectedKeg}/>
       buttonText = "Return to Keg List";
     }
-    else if(this.props.formVisibleOnPage) {
-      currentlyVisibleState = <NewKegForm onNewKegCreation={this.handleAddingNewKegToList}/>;
-      buttonText = "Return to Keg List";
-    } else {
+    // else if(this.props.formVisibleOnPage) {
+    //   currentlyVisibleState = <Modal onNewKegCreation={this.handleAddingNewKegToList}
+    //                             modalRef={(n) => (this.modal = n)}
+    //                             buttonRef={(n) => (this.closeButton = n)}
+    //                             closeModal={this.handleClick}
+    //                             onKeyDown={this.onKeyDown}
+    //                             onClickOutside={this.onClickOutside}/>;
+    //   buttonText = "Return to Keg List";
+     else {
       currentlyVisibleState = <KegList kegList={this.props.masterKegList} onKegSelection={this.handleChangingSelectedKeg} onSellingKeg={this.handleSellingKeg} onDeletingKeg ={this.handleDeletingKeg} />
-      buttonText = "Add New Keg";
+      showButton = <TriggerButton 
+      showModal={this.showModal}
+      buttonRef={(n) => (this.TriggerButton = n)}
+      triggerText={triggerText}
+     />
     }
     return (
      <React.Fragment>
        {currentlyVisibleState}
+       {showButton}
        <button onClick={this.handleClick} className="btn btn-success">{buttonText}</button>
+       {this.state.isShown ? (
+       <Modal
+        onNewKegCreation={this.handleAddingNewKegToList}
+        modalRef={(n) => (this.modal = n)}
+        buttonRef={(n) => (this.closeButton = n)}
+        closeModal={this.handleClick}
+        onKeyDown={this.onKeyDown}
+        onClickOutside={this.onClickOutside}
+       />
+       ) : null}
      </React.Fragment>
     )
   }
