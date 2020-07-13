@@ -23,8 +23,6 @@ class KegControl extends Component {
     const { dispatch } = this.props;
     const action = a.addKeg(newKeg)
     dispatch(action);
-    // const action2 = a.toggleForm();
-    // dispatch(action2);
     this.closeModal();
   }
 
@@ -40,11 +38,6 @@ class KegControl extends Component {
     if(this.props.selectedKeg.keg != null) { 
       const action2 = a.resetKeg();
       dispatch(action2);
-    // } else {
-    //   const action3 = a.toggleForm();
-    //   dispatch(action3);
-    //   this.closeButton.focus();
-    //   this.toggleScrollLock();
     }
   }
 
@@ -106,14 +99,6 @@ class KegControl extends Component {
       buttonText = "Return to Keg List";
       returnHomeButton = <button onClick={this.handleClick} className="btn btn-success">{buttonText}</button>
     }
-    // else if(this.props.formVisibleOnPage) {
-    //   currentlyVisibleState = <Modal onNewKegCreation={this.handleAddingNewKegToList}
-    //                             modalRef={(n) => (this.modal = n)}
-    //                             buttonRef={(n) => (this.closeButton = n)}
-    //                             closeModal={this.handleClick}
-    //                             onKeyDown={this.onKeyDown}
-    //                             onClickOutside={this.onClickOutside}/>;
-    //   buttonText = "Return to Keg List";
      else {
       currentlyVisibleState = <KegList kegList={this.props.masterKegList} onKegSelection={this.handleChangingSelectedKeg} onSellingKeg={this.handleSellingKeg} onDeletingKeg ={this.handleDeletingKeg} />
       showButton = <TriggerButton 

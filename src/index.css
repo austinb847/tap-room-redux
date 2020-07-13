@@ -149,7 +149,7 @@ code {
 }
 
 .delete-button {
-  font-size: 25px;
+  font-size: 30px;
 }
 
 .delete-button:hover {
@@ -162,7 +162,7 @@ code {
 }
 
 .add-keg-button:hover {
- fill: red;
+ fill: green;
  cursor: pointer;
  -webkit-transform: rotate(360deg);
           transform: rotate(360deg);
