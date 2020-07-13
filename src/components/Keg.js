@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { DeleteFilled } from '@ant-design/icons';
-import {ReactComponent as BeerIcon} from './beer.svg';
+import { ReactComponent as BeerIcon } from './beer.svg';
 
 function Keg(props) {
   

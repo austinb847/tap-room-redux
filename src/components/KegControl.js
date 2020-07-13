@@ -25,7 +25,7 @@ class KegControl extends Component {
     dispatch(action);
     // const action2 = a.toggleForm();
     // dispatch(action2);
-    this.setState({isShown: false});
+    this.closeModal();
   }
 
   handleChangingSelectedKeg = (id) => {
