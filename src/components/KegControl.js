@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import NewKegForm from './NewKegForm';
+//import NewKegForm from './NewKegForm';
 import Modal from './Modal';
 import TriggerButton from './TriggerButton';
 import KegList from './KegList';
