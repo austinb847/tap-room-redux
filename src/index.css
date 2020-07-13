@@ -148,5 +148,18 @@ code {
   opacity: 0.89;
 }
 
+.delete-button {
+  font-size: 25px;
+}
+
+.delete-button:hover {
+  color: red;
+}
+
+.add-keg-button:hover {
+ fill: red;
+ cursor: pointer;
+}
+
 
 
