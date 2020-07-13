@@ -117,10 +117,10 @@ class KegControl extends Component {
      else {
       currentlyVisibleState = <KegList kegList={this.props.masterKegList} onKegSelection={this.handleChangingSelectedKeg} onSellingKeg={this.handleSellingKeg} onDeletingKeg ={this.handleDeletingKeg} />
       showButton = <TriggerButton 
-      showModal={this.showModal}
-      buttonRef={(n) => (this.TriggerButton = n)}
-      triggerText={triggerText}
-     />
+                    showModal={this.showModal}
+                    buttonRef={(n) => (this.TriggerButton = n)}
+                    triggerText={triggerText}
+                  />
     }
     return (
      <React.Fragment>

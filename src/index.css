@@ -16,11 +16,6 @@ code {
   text-align: center;
 }
 
-.keg:hover{
-  font-size: 29px;
-  cursor: pointer;
-  color: red;
-}
 
 *,
 *:before,
@@ -114,5 +109,44 @@ code {
 
 .add-button {
   text-align: center;
+  margin-top: 4%;
+  margin-bottom: 4%;
 }
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 20px 5px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  /* column-count: 4; */
+  flex: 0 0 33.333333%;
+}
+
+.keg-item {
+  box-shadow: 3px 4px 16px #888888;
+  border-radius: 12px;
+  background-color: #89ABE3FF;
+  padding: 4%;
+  box-sizing: border-box;
+  margin: 8px;
+}
+
+.keg:hover{
+  font-size: 29px;
+  cursor: pointer;
+  color: red;
+}
+
+.keg-item:hover{
+  opacity: 0.89;
+}
+
+
 
